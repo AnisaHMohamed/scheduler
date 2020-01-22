@@ -13,6 +13,9 @@ import Header from "components/Appointment/Header.js"
 import Empty from "components/Appointment/Empty.js"
 import Show from "components/Appointment/Show.js"
 import Confirm from "components/Appointment/Confirm.js"
+import Status from "components/Appointment/Status.js"
+import Error from "components/Appointment/Error.js"
+
 storiesOf("Button", module)
   .addParameters({
     backgrounds: [{ name: "dark", value: "#222f3e", default: true }]
@@ -144,6 +147,8 @@ storiesOf("InterviewerListItem", module)
     .add("Empty", () => <Empty onAdd={action("onAdd")} />)
     .add("Show", () => <Show onDelete={action("onDelete")} onEdit={action("onEdit")} />)
     .add("Confirm", () => <Confirm message="Delete the appointment?" onCancel={action("onCancel")} onConfirm={action("onConfirm")}  />)
-
+    .add("Status when Deleting", () => <Status message="Deleting" />)
+    .add("Status when Saving", () => <Status message="Saving" />)
+     .add("Error", () => <Error message="Could not delete appointment." onClose={action("onClose")} />)
 
 ;
