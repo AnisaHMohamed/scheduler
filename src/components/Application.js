@@ -58,26 +58,20 @@ const appointments = [
     }
   }
 ];
-const days = [
-  {
-    id: 1,
-    name: "Monday",
-    spots: 2
-  },
-  {
-    id: 2,
-    name: "Tuesday",
-    spots: 5
-  },
-  {
-    id: 3,
-    name: "Wednesday",
-    spots: 0
-  }
-];
+
+
 
 export default function Application(props) {
   const [day, setDay] = useState("Monday");
+  const [days, setDays] = useState([])
+  
+  useEffect(() => {
+    axios.get(`/api/days`).then((daysData) => {
+      console.log("find me here", daysData)
+      setDays(daysData.data) 
+    })
+  },[])
+  
   const appointmentList = appointments.map(appointment => {
     return <Appointment key={appointment.id} {...appointment} />;
   });
