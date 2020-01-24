@@ -10,9 +10,8 @@ export default function Appointment (props) {
   return (
     <Fragment>
   <Header time={props.time} />
-  
 
-    {props.interview ? <Show student={props.interview.student}  interviewer={props.interview.interviewer.name}interview={props.interview.student, props.interview.interviewer }/> : <Empty /> }
+    {props.interview ? <Show student={props.interview.student}  interviewer={props.interview.interviewer.name} interview={props.interview }/> : <Empty /> }
   </Fragment>
   )
 }
