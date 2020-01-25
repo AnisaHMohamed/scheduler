@@ -29,15 +29,11 @@ const state = {
 };
 export function getAppointmentsForDay(state, day) {
   const filteredDays = state.days.filter( mappedDay => mappedDay.name === day);
+  if (!filteredDays.length) { return []; }
   const appointmentArray = [];
-  //console.log(filteredDays[0].appointments)
-  for (item in filteredDays[0].appointments){
-    //console.log("here",filteredDays[0].appointments[item])
-
-    //console.log("whats this?",state.appointments[filteredDays[0].appointments[item]])
-    //appointmentArray.push(filteredDays[0].appointments[item])
+  for (let item in filteredDays[0].appointments){
+ 
     appointmentArray.push(state.appointments[filteredDays[0].appointments[item]])
   }
-  //console.log("the apppoinymrent array",appointmentArray)
 return appointmentArray
 }
