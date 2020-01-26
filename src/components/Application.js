@@ -32,10 +32,11 @@ export default function Application(props) {
     console.log("the interviewer data",state.interviewers)
     const filteredAppointments = getAppointmentsForDay(state, state.day);
     const appointmentList = filteredAppointments.map(appointment => {
+      console.log("appointmet ", appointment)
+
     const interview = getInterview(state, appointment.interview);
     return <Appointment interview={interview} time={appointment.time} key={appointment.id} {...appointment} />;
   });
-  console.log("appointmet list", appointmentList[1])
   
   
   return (
