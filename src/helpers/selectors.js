@@ -21,3 +21,16 @@ export function getAppointmentsForDay(state, day) {
   }
 return appointmentArray
 }
+
+export  function getInterviewersForDay(state, day) {
+  const appointmentArr = getAppointmentsForDay(state, day)
+  if (!appointmentArr.length) { return []; }
+  const interviewersArray = [];
+  console.log("mapped ---> ",appointmentArr)
+  
+  for (let item of appointmentArr){
+ console.log(item.interview)
+   if ( item.interview ) 
+   {interviewersArray.push(state.interviewers[item.interview.interviewer])}
+  }
+return interviewersArray}

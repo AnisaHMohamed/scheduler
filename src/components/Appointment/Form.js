@@ -14,7 +14,7 @@ import InterviewerList from "components/InterviewerList"
     reset()
     props.onCancel()
   }
-
+console.log("props.interviewers",props.interviewers)
   return (
     <main className="appointment__card appointment__card--create">
     <section className="appointment__card-left">

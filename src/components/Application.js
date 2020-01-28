@@ -3,7 +3,7 @@ import DayList from "components/DayList";
 import "components/Application.scss";
 import axios from "axios"
 import Appointment from "components/Appointment/index";
-import{ getAppointmentsForDay, getInterview }from "../helpers/selectors"
+import{ getAppointmentsForDay, getInterview, getInterviewersForDay }from "../helpers/selectors"
 
 export default function Application(props) {
   const [state, setState] = useState({
@@ -13,7 +13,28 @@ export default function Application(props) {
     interviewers:{}
   });
   
+  function bookInterview(id, interview) {
+    console.log(id, interview);
+
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview }
+    };
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
+
+    setState({...state,appointments });
+    return axios.put(`/api/appointments/${id}`,  {
+     interview:{ student:interview.student,
+       interviewer: interview.interviewer}
+    } )
+    //take student, interviewer
+  
+  } 
   const setDay = day => setState({ ...state, day });
+  
   
   useEffect(() => {
     let promiseDays = axios.get(`/api/days`);
@@ -32,11 +53,23 @@ export default function Application(props) {
     console.log("the interviewer data",state.interviewers)
     const filteredAppointments = getAppointmentsForDay(state, state.day);
     const appointmentList = filteredAppointments.map(appointment => {
-      console.log("appointmet ", appointment)
+      console.log("appointment ", appointment)
 
-    const interview = getInterview(state, appointment.interview);
-    return <Appointment interview={interview} time={appointment.time} key={appointment.id} {...appointment} />;
-  });
+      const interview = getInterview(state, appointment.interview);
+
+      console.log("interview",interview)
+
+      const interviewersList = getInterviewersForDay(state, state.day)
+      console.log("interviewersList", interviewersList)
+      return ( 
+      <Appointment 
+      interview={interview} 
+      time={appointment.time} 
+      key={appointment.id} {...appointment} 
+      interviewers={interviewersList}
+      bookInterview={bookInterview}
+      />);
+    });
   
   
   return (
