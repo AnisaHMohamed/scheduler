@@ -16,7 +16,7 @@ return (
   alt={props.name}
   onClick={props.setInterviewer}
 />
-{props.name}
+{props.selected && props.name}
 </li>)
 }
 

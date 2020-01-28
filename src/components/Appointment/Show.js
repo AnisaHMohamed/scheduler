@@ -3,12 +3,13 @@ import React from "react"
 // onEdit:Function to be called when the user clicks the Edit button
 // onDelete:Function to be called when the user clicks the Delete button
 export default function (props) {
+  console.log("hello",props)
 return (<main className="appointment__card appointment__card--show">
 <section className="appointment__card-left">
   <h2 className="text--regular">{props.student}</h2>
   <section className="interviewer">
     <h4 className="text--light">Interviewer</h4>
-    <h3 className="text--regular">{props.interviewer}</h3>
+    <h3 className="text--regular">{props.interviewer && props.interviewer.name}</h3>
   </section>
 </section>
 <section className="appointment__card-right">
