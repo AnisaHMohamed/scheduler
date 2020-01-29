@@ -92,12 +92,22 @@ export default function useApplicationData() {
         dispatch({ type: SET_INTERVIEW, id, interview: null })
       })
   }
-
+  const formatSpots = (prop) => {
+    if(prop >1) {
+      return`${prop} spots remaining`;
+    }
+    if (prop === 1) {
+      return `${prop} spot remaining`
+    } else {
+      return "no spots remaining";
+    } 
+  }
   return {
     state,
     setDay,
     bookInterview,
-    cancelInterview
+    cancelInterview,
+    formatSpots
   }
 
 }
