@@ -3,7 +3,10 @@
 
 export function getInterview(state,interview) {
   if (interview) {
-    const stateUpdated = {...interview, interviewer:state.interviewers[interview.interviewer]}
+    const stateUpdated = {...interview, interviewer:state.interviewers[interview.interviewer]}//not right?
+    console.log("state.interviewer:---->",state.interviewers)
+    console.log("interviewer:---->",interview)
+
     return stateUpdated
   } else {
     return null
@@ -35,6 +38,7 @@ export  function getInterviewersForDay(state, day) {
   if (!filteredDay.interviewers) return [];
 
   const result =  Object.values(state.interviewers).filter( interviewer => filteredDay.interviewers.includes(interviewer.id))
+  console.log("result",result)
   return result;
 }
 //const appointmentArray = []

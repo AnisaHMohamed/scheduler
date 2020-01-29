@@ -5,7 +5,15 @@ import axios from "axios"
 import Appointment from "components/Appointment/index";
 import{ getAppointmentsForDay, getInterview, getInterviewersForDay }from "../helpers/selectors"
 
+
 export default function Application(props) {
+  // const {
+  //   state,
+  //   setDay,
+  //   bookInterview,
+  //   cancelInterview
+  // } = useApplicationData();
+
   const [state, setState] = useState({
     day: "Monday",
     days: [],
@@ -17,15 +25,11 @@ export default function Application(props) {
 
   const cancelInterview = (id) => {
     return axios.delete(`/api/appointments/${id}`)
-      
-      
-      
   }
 
 
 
   function bookInterview(id, interview) {
-    console.log("Booked",id, interview);
 
     const appointment = {
       ...state.appointments[id],
