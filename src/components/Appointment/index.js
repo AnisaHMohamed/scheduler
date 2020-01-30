@@ -9,6 +9,7 @@ import Confirm from "components/Appointment/Confirm"
 import Error from "components/Appointment/Error"
 import "components/Appointment/styles.scss";
 
+
 const EMPTY = "EMPTY";
 const SHOW = "SHOW";
 const CREATE = "CREATE";
@@ -19,7 +20,7 @@ const ERROR_SAVE ="ERROR_SAVE"
 const ERROR_DELETE  ="ERROR_DELETE" 
 
 export default function Appointment(props){
-console.log("Props.interview",props.interview)
+// console.log("Props.interview",props.interview)
  const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
   );
@@ -52,7 +53,7 @@ function onEdit() {
       interviewer
     };
     transition(SAVING);
-    console.log("-->",props)
+    // console.log("-->",props)
     props
       .bookInterview(props.id, interview)
       .then(() => transition(SHOW))
@@ -60,12 +61,13 @@ function onEdit() {
 
      ;
   }
-  console.log("**props**",props)
+  // console.log("**props**",props)
  //console.log( "************",props.interviewers[props.interview.interviewer])
- console.log(mode)
+//  console.log(mode)
 
   return (
-  <article className="appointment">
+  <article className="appointment"
+  data-testid="appointment">
   <Header time={props.time}/>
   
   {mode === EMPTY && <Empty onAdd={
