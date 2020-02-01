@@ -16,12 +16,14 @@ return (<main className="appointment__card appointment__card--show">
   <section className="appointment__actions">
     <img
       className="appointment__actions-button"
+      data-testid="Edit"
       src="images/edit.png"
       alt="Edit"
       onClick={props.onEdit}
     />
     <img
       className="appointment__actions-button"
+      data-testid="Delete"
       src="images/trash.png"
       alt="Delete"
       onClick={props.onDelete}

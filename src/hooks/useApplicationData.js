@@ -1,4 +1,4 @@
-import { useReducer, useEffect } from "react";
+import React, { useReducer, useEffect } from "react";
  import axios from "axios";
 //import  * as axios from 'axios';
 //import {axios,put} from "axios";
@@ -95,15 +95,21 @@ export default function useApplicationData() {
         dispatch({ type: SET_INTERVIEW, id, interview: null })
       })
   }
+
   const formatSpots = (prop) => {
-    if(prop >1) {
-      return`${prop} spots remaining`;
+    if(prop > 0) {
+      return (
+        <span>
+          <span data-testid="spotsRemaining">{prop}</span> spot{prop > 1 && 's'} remaining
+        </span>
+      )
     }
-    if (prop === 1) {
-      return `${prop} spot remaining`
-    } else {
-      return "no spots remaining";
-    } 
+    return (
+      <span>
+        <span data-testid="spotsRemaining">no</span> spots remaining
+      </span>
+    )
+
   }
   return {
     state,

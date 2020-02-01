@@ -32,7 +32,7 @@ function findInterviewervyID (interviewerArray,id) {
     props
      .cancelInterview(props.id)
      .then(() => transition(EMPTY))
-     .catch(error => transition(ERROR_DELETE));
+     .catch(error => transition(ERROR_DELETE, true));
 
     }
     
@@ -66,57 +66,48 @@ function onEdit() {
 //  console.log(mode)
 
   return (
-  <article className="appointment"
-  data-testid="appointment">
-  <Header time={props.time}/>
-  
-  {mode === EMPTY && <Empty onAdd={
-    () => transition(CREATE)} />} 
-    
+    <article className="appointment" data-testid="appointment">
+      <Header time={props.time} />
 
-{mode === SHOW && (
-  <Show
-    student={props.interview.student}
-    interviewer={findInterviewervyID(props.interviewers, props.interview.interviewer)}
-              onDelete={onDelete}
+      {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
+
+      {mode === SHOW && (
+        <Show
+          student={props.interview.student}
+          interviewer={findInterviewervyID(
+            props.interviewers,
+            props.interview.interviewer
+          )}
+          onDelete={onDelete}
           onEdit={onEdit}
-  />
-)}
-    {mode ===CREATE &&
-      <Form 
-      onCancel={()=> back()}
-      interviewers={props.interviewers}
-      interviewer={props.interview && props.interview.interviewer}
-      onSave={save}
-      name={props.interview && props.interview.student}
-    />
-    }
-      {mode ===SAVING &&
-      <Status 
-      message="Saving"
-    />
-    }
-    {mode ===DELETING &&
-      <Status 
-      message="Deleting"
-    />
-    }
-    {mode === CONFIRM &&
-<Confirm
-       id={props.id}
-
-       onCancel={() => back()}
-       onConfirm={()=>cancelInterview()}
-  message="Are you sure you would like to Delete?"
-/>
-    }
-    {mode === ERROR_DELETE &&
-    <Error
-    message="Could not cancel appointment"
-    onClose={()=>back()}
-    />}
-
- 
-  </article>)
+        />
+      )}
+      {mode === CREATE && (
+        <Form
+          onCancel={() => back()}
+          interviewers={props.interviewers}
+          interviewer={props.interview && props.interview.interviewer}
+          onSave={save}
+          name={props.interview && props.interview.student}
+        />
+      )}
+      {mode === SAVING && <Status message="Saving" />}
+      {mode === DELETING && <Status message="Deleting" />}
+      {mode === CONFIRM && (
+        <Confirm
+          id={props.id}
+          onCancel={() => back()}
+          onConfirm={() => cancelInterview()}
+          message="Are you sure you would like to Delete?"
+        />
+      )}
+      {mode === ERROR_DELETE && (
+        <Error message="Could not cancel appointment" onClose={() => back()} />
+      )}
+      {mode === ERROR_SAVE && (
+        <Error message="Could not save appointment" onClose={() => back()} />
+      )}
+    </article>
+  );
 
 }
