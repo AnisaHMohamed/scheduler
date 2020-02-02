@@ -52,7 +52,7 @@ const fixtures = {
     }
   }
 };
-
+//get http request functions
 export default {
   get: jest.fn(url => {
     if (url === "/api/days") {
@@ -62,47 +62,32 @@ export default {
         data: fixtures.days
       });
     }
-// console.log("HELLO---------->*******")
     if (url === "/api/appointments") {
       return Promise.resolve({
-        status:200,
+        status: 200,
         statusText: "OK",
         data: fixtures.appointments
-      })
+      });
     }
 
     if (url === "/api/interviewers") {
       return Promise.resolve({
-        status:200,
+        status: 200,
         statusText: "OK",
         data: fixtures.interviewers
-      })
+      });
     }
   }),
   put: jest.fn(url => {
-      return Promise.resolve({
-        status: 204,
-        statusText: "No Content" 
-      });
+    return Promise.resolve({
+      status: 204,
+      statusText: "No Content"
+    });
   }),
   delete: jest.fn(url => {
-
-    
-      return Promise.resolve({
-        status:204,
-        statusText: "No Content" 
-      })
-
+    return Promise.resolve({
+      status: 204,
+      statusText: "No Content"
+    });
   })
-
-//  return axios.put(`api/appointments/${id}`, appointment)
-//    .then(() => {
-//     if (!state.appointments[id].interview) {
-//       const dayObject = state.days.find(day => day.name === state.day);
-//       state.days[dayObject.id - 1].spots--;
-//       dispatch({ type: SET_INTERVIEW, id, interview })
-//     }else{
-//       dispatch({ type: SET_INTERVIEW, id, interview })
-//     }
-//   })
-}
+};
