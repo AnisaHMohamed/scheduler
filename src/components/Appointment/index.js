@@ -3,49 +3,44 @@ import Header from "components/Appointment/Header";
 import Show from "components/Appointment/Show";
 import Empty from "components/Appointment/Empty";
 import Form from "components/Appointment/Form";
-import Status from "components/Appointment/Status"
+import Status from "components/Appointment/Status";
 import { useVisualMode } from "hooks/useVisualMode";
-import Confirm from "components/Appointment/Confirm"
-import Error from "components/Appointment/Error"
+import Confirm from "components/Appointment/Confirm";
+import Error from "components/Appointment/Error";
 import "components/Appointment/styles.scss";
-
 
 const EMPTY = "EMPTY";
 const SHOW = "SHOW";
 const CREATE = "CREATE";
 const SAVING = "SAVING";
-const DELETING = "DELETING"
-const CONFIRM = "CONFIRM"
-const ERROR_SAVE ="ERROR_SAVE"
-const ERROR_DELETE  ="ERROR_DELETE" 
+const DELETING = "DELETING";
+const CONFIRM = "CONFIRM";
+const ERROR_SAVE = "ERROR_SAVE";
+const ERROR_DELETE = "ERROR_DELETE";
 
-export default function Appointment(props){
-// console.log("Props.interview",props.interview)
- const { mode, transition, back } = useVisualMode(
+export default function Appointment(props) {
+  // console.log("Props.interview",props.interview)
+  const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
   );
-function findInterviewervyID (interviewerArray,id) {
- return interviewerArray.find((interviewer)=> id === interviewer.id)
-}
+  function findInterviewervyID(interviewerArray, id) {
+    return interviewerArray.find(interviewer => id === interviewer.id);
+  }
   function cancelInterview() {
     transition(DELETING, true);
     props
-     .cancelInterview(props.id)
-     .then(() => transition(EMPTY))
-     .catch(error => transition(ERROR_DELETE, true));
+      .cancelInterview(props.id)
+      .then(() => transition(EMPTY))
+      .catch(error => transition(ERROR_DELETE, true));
+  }
 
-    }
-    
-function onDelete() {
-  transition(CONFIRM)
-  ;
-}
+  function onDelete() {
+    transition(CONFIRM);
+  }
 
-
-function onEdit() {
- transition(CREATE)
-
-}
+  function onEdit() {
+    transition(CREATE);
+  }
 
   function save(name, interviewer) {
     const interview = {
@@ -58,12 +53,7 @@ function onEdit() {
       .bookInterview(props.id, interview)
       .then(() => transition(SHOW))
       .catch(error => transition(ERROR_SAVE, true));
-
-     ;
   }
-  // console.log("**props**",props)
- //console.log( "************",props.interviewers[props.interview.interviewer])
-//  console.log(mode)
 
   return (
     <article className="appointment" data-testid="appointment">
@@ -109,5 +99,4 @@ function onEdit() {
       )}
     </article>
   );
-
 }

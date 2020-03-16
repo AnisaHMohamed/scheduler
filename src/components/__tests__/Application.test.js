@@ -51,6 +51,7 @@ describe("Application", () => {
       return appointments;
     });
   });
+
   it("all appointment test_ids", async () => {
     const { container } = render(<Application />);
     await waitForElement(() => {
@@ -172,6 +173,7 @@ describe("Application", () => {
 
     expect(spotsRemainingAfterAdd).toEqual(spotsRemaining);
   });
+
   it("shows the save error when failing to save an appointment", async () => {
     axios.put.mockRejectedValueOnce();
     const { container, debug } = render(<Application />);
